@@ -1,0 +1,31 @@
+const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 10;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const resultPara = document.getElementById('result');
+            const attemptsPara = document.getElementById('attempts');
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                resultPara.textContent = 'Por favor, introduce un número válido entre 1 y 100.';
+                return;
+            }
+
+            if (guess === randomNumber) {
+                resultPara.textContent = `¡Felicidades! Has adivinado el número ${randomNumber} en ${10 - attempts + 1} intentos.`;
+                attemptsPara.textContent = '';
+            } else if (guess < randomNumber) {
+                resultPara.textContent = 'El número es mayor.';
+                attemptsPara.textContent = `Intentos restantes: ${attempts - 1}`;
+            } else {
+                resultPara.textContent = 'El número es menor.';
+                attemptsPara.textContent = `Intentos restantes: ${attempts - 1}`;
+            }
+
+            attempts--;
+
+            if (attempts === 0) {
+                resultPara.textContent = `¡Has agotado tus intentos! El número correcto era ${randomNumber}.`;
+                attemptsPara.textContent = '';
+            }
+        }
